@@ -104,7 +104,10 @@ song_collector =
 points =
   song_collector
   .map { |year, songs_by_month|
-    [year, songs_by_month.sort_by { |month, _| month }.to_h]
+    [
+      year,
+      songs_by_month.sort_by { |month, _| month }.to_h
+    ]
   }
   .to_h
   .sort_by { |year, _| year }
@@ -116,7 +119,9 @@ points =
   .flat_map { |year, songs_by_month|
     [year].product(songs_by_month)
   }
-  .map { |(year, (month, average_valence))| [year, month, average_valence] }
+  .map { |(year, (month, average_valence))|
+    [year, month, average_valence]
+  }
   .map.with_index { |array, index| [index] + array }
 
 points.each { |e| puts e[0].to_s + "," + e[3].to_s }
